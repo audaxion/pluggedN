@@ -24,12 +24,15 @@ themes.push({name: 'plug.dj Christmas Ice', url: 'M0CeHah'});
 themes.push({name: 'Digital Dungeon Lite', url: 'zSMRtE6'});
 themes.push({name: 'Fairy Tale Land', url: 'XZNVZmj'});
 
+var autowoot = [];
+autowoot.push({name: 'off', vote: null);
+autowoot.push({name: 'on', vote: vote});
+autowoot.push({name: 'ranked ONLY', vote: rankedVote});
 
 var settings = {
 	showAudience: false,
 	videoOpacity: 0,
-	autowoot: false,
-	rankedAutowoot: true,
+	autowoot: 0,
 	inlineImages: true,
 	theme:0,
 	spaceMute: true,
@@ -48,8 +51,12 @@ var gui = new dat.GUI();
 gui.remember(settings);
 gui.add(settings, 'showAudience').onChange(showHideAudience);
 gui.add(settings, 'videoOpacity',0,1).onChange(showHideVideo);
-gui.add(settings, 'autowoot').onChange(setWootBehavior);
-gui.add(settings, 'rankedAutowoot').onChange(setWootBehavior);
+var autowootSettingsObject = {};
+for(var i = 0; i < autowoot.length; i++) {
+	var woot = autowoot[i];
+	autowootSettingsObject[woot.name] = i;
+}
+gui.add(settings, 'autowoot', autowootSettingsObject).onChange(setWootBehavior);
 gui.add(settings, 'inlineImages').onChange(doInlineImages);
 var themeSettingsObject = {}
 for(var i = 0; i < themes.length; i++) {
@@ -173,7 +180,7 @@ function advance(obj)
 	clearTimeout(djCheckTimeout);
 	if (obj == null) return; // no dj
 
-	if(settings.autowoot || settings.rankedAutowoot) {
+	if(settings.autowoot > 0) {
 		var minTime = settings.autoWootMinTime * 1000;
 		var maxTime = settings.autoWootMaxTime * 1000;
 		if(maxTime < minTime) {
@@ -181,11 +188,8 @@ function advance(obj)
 		}
 		var diffTime = maxTime - maxTime;
 		var timer = minTime + diffTime * Math.random();
-		if (settings.autowoot) {
-			voteTimeout = setTimeout(vote,timer);
-		} else {
-			voteTimeout = setTimeout(rankedVote,timer);
-		}
+		var woot = autowoot[settings.autowoot];
+		voteTimeout = setTimeout(woot.vote,timer);
 	}
 	if(settings.frontOfLineMessage) {
 		if(API.getWaitListPosition() === 0) {
@@ -194,11 +198,10 @@ function advance(obj)
 	}
 }
 function setWootBehavior() {
-	if(settings.autowoot) {
-		voteTimeout = setTimeout(vote,10000);
-	} else if (settings.rankedAutowoot) {
-		voteTimeout = setTimeout(rankedVote,10000);
-	}else {
+	if(settings.autowoot > 0) {
+		var woot = autowoot[settings.autowoot];
+		voteTimeout = setTimeout(woot.vote,timer);
+	} else {
 		clearTimeout(voteTimeout)
 	}
 
