@@ -26,8 +26,8 @@ themes.push({name: 'Fairy Tale Land', url: 'XZNVZmj'});
 
 var autowoot = [];
 autowoot.push({name: 'off', vote: null});
-autowoot.push({name: 'on', vote: vote});
-autowoot.push({name: 'ranked ONLY', vote: rankedVote});
+autowoot.push({name: 'on', vote: 'vote'});
+autowoot.push({name: 'ranked ONLY', vote: 'rankedVote'});
 
 var settings = {
 	showAudience: false,
@@ -189,7 +189,7 @@ function advance(obj)
 		var diffTime = maxTime - maxTime;
 		var timer = minTime + diffTime * Math.random();
 		var woot = autowoot[settings.autowoot];
-		voteTimeout = setTimeout(eval(woot.vote),timer);
+		voteTimeout = setTimeout(window[woot.vote],timer);
 	}
 	if(settings.frontOfLineMessage) {
 		if(API.getWaitListPosition() === 0) {
@@ -200,7 +200,7 @@ function advance(obj)
 function setWootBehavior() {
 	if(settings.autowoot > 0) {
 		var woot = autowoot[settings.autowoot];
-		voteTimeout = setTimeout(eval(woot.vote),10000);
+		voteTimeout = setTimeout(window[woot.vote],10000);
 	} else {
 		clearTimeout(voteTimeout)
 	}
