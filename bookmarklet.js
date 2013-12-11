@@ -5,7 +5,8 @@ var djCheckTimeout = null;
 var user = null;
 var themes = [];
 var autoResponseSentTimes = {}
-themes.push({name: 'none', url: null})
+themes.push({name: 'none', url: null});
+themes.push({name: "bayan's theme", url: 'zuEvBkP'});
 themes.push({name: 'Chillout Mixer Theme', url: 'nptZvUk'});
 themes.push({name: 'Chillout Mixer Theme II', url: 'mL0fuwb'});
 themes.push({name: 'Digital Dungeon Theme', url: 'WTylHRy'});
@@ -27,7 +28,8 @@ themes.push({name: 'Fairy Tale Land', url: 'XZNVZmj'});
 var settings = {
 	showAudience: false,
 	videoOpacity: 0,
-	autowoot: true,
+	autowoot: false,
+	rankedAutowoot: true,
 	inlineImages: true,
 	theme:0,
 	spaceMute: true,
@@ -47,6 +49,7 @@ gui.remember(settings);
 gui.add(settings, 'showAudience').onChange(showHideAudience);
 gui.add(settings, 'videoOpacity',0,1).onChange(showHideVideo);
 gui.add(settings, 'autowoot').onChange(setWootBehavior);
+gui.add(settings, 'rankedAutowoot').onChange(setWootBehavior);
 gui.add(settings, 'inlineImages').onChange(doInlineImages);
 var themeSettingsObject = {}
 for(var i = 0; i < themes.length; i++) {
@@ -189,13 +192,20 @@ function advance(obj)
 function setWootBehavior() {
 	if(settings.autowoot) {
 		voteTimeout = setTimeout(vote,10000);
-	} else {
+	} else if (settings.rankedAutowoot) {
+		voteTimeout = setTimeout(rankedVote,10000);
+	}else {
 		clearTimeout(voteTimeout)
 	}
 
 }
 function vote() {
 	$('#room #woot').click();
+}
+function rankedVote() {
+	if (API.getDJ().permission >= API.ROLE.RESIDENTDJ) {
+		$('#room #woot').click();
+	}
 }
 function mehClicked() {
 	clearTimeout(voteTimeout)
