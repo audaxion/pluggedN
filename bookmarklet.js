@@ -25,7 +25,7 @@ themes.push({name: 'Digital Dungeon Lite', url: 'zSMRtE6'});
 themes.push({name: 'Fairy Tale Land', url: 'XZNVZmj'});
 
 var autowoot = [];
-autowoot.push({name: 'off', vote: null);
+autowoot.push({name: 'off', vote: null});
 autowoot.push({name: 'on', vote: vote});
 autowoot.push({name: 'ranked ONLY', vote: rankedVote});
 
@@ -206,10 +206,10 @@ function setWootBehavior() {
 	}
 
 }
-function vote() {
+var vote = function() {
 	$('#room #woot').click();
 }
-function rankedVote() {
+var rankedVote = function() {
 	if (API.getDJ().permission >= API.ROLE.RESIDENTDJ) {
 		$('#room #woot').click();
 	}
