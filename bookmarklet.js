@@ -181,7 +181,11 @@ function advance(obj)
 		}
 		var diffTime = maxTime - maxTime;
 		var timer = minTime + diffTime * Math.random();
-		voteTimeout = setTimeout(vote,timer);
+		if (settings.autowoot) {
+			voteTimeout = setTimeout(vote,timer);
+		} else {
+			voteTimeout = setTimeout(rankedVote,timer);
+		}
 	}
 	if(settings.frontOfLineMessage) {
 		if(API.getWaitListPosition() === 0) {
