@@ -200,7 +200,7 @@ function advance(obj)
 function setWootBehavior() {
 	if(settings.autowoot > 0) {
 		var woot = autowoot[settings.autowoot];
-		voteTimeout = setTimeout(woot.vote,timer);
+		voteTimeout = setTimeout(woot.vote,10000);
 	} else {
 		clearTimeout(voteTimeout)
 	}
