@@ -189,7 +189,7 @@ function advance(obj)
 		var diffTime = maxTime - maxTime;
 		var timer = minTime + diffTime * Math.random();
 		var woot = autowoot[settings.autowoot];
-		voteTimeout = setTimeout(woot.vote,timer);
+		voteTimeout = setTimeout(eval(woot.vote),timer);
 	}
 	if(settings.frontOfLineMessage) {
 		if(API.getWaitListPosition() === 0) {
@@ -200,7 +200,7 @@ function advance(obj)
 function setWootBehavior() {
 	if(settings.autowoot > 0) {
 		var woot = autowoot[settings.autowoot];
-		voteTimeout = setTimeout(woot.vote,10000);
+		voteTimeout = setTimeout(eval(woot.vote),10000);
 	} else {
 		clearTimeout(voteTimeout)
 	}
