@@ -206,10 +206,10 @@ function setWootBehavior() {
 	}
 
 }
-var vote = function() {
+function vote() {
 	$('#room #woot').click();
 }
-var rankedVote = function() {
+function rankedVote() {
 	if (API.getDJ().permission >= API.ROLE.RESIDENTDJ) {
 		$('#room #woot').click();
 	}
