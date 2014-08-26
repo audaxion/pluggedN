@@ -347,6 +347,7 @@ function checkIfDJing() {
 	$('.button-dj:visible').click();
 }
 function showTheme() {
+	return;
 	if(originalTheme === null) {
 		originalTheme = $('body').css('background-image');
 	}
