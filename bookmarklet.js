@@ -356,7 +356,7 @@ function showTheme() {
 			$('body').css('background-image', originalTheme);
 			$('#playback .background').show();
 		} else {
-			$('body').css('background-image', 'url(http://i.imgur.com/'+theme.url+'.png)');
+			$('body').css('background-image', 'url(https://i.imgur.com/'+theme.url+'.png)');
 			$('#playback .background').hide()
 		}
 	} else {
@@ -391,10 +391,10 @@ function doInlineImages() {
 		    		var img = new Image()
 		    		img.onload = imageLoaded;
 		    		img.src = t.href
-		            return t.outerHTML = "<img class='closeImage' style='position: absolute; right: 0px; cursor: pointer;' src='http://i.imgur.com/JvlpEy9.png' data-src='" + t.href + "'' /><img class='plugEmbed' style='width: 100%' src='" + t.href + "' />"
+		            return t.outerHTML = "<img class='closeImage' style='position: absolute; right: 0px; cursor: pointer;' src='https://i.imgur.com/JvlpEy9.png' data-src='" + t.href + "'' /><img class='plugEmbed' style='width: 100%' src='" + t.href + "' />"
 		        } else if (mediacrushMatch = t.href.match(/\/\/mediacru.sh\/([a-zA-Z0-9]+)/) ) {
 		        	var embed = "https://mediacru.sh/" + mediacrushMatch[1] + "/frame"
-		        	return t.outerHTML = "<img class='closeImage' style='position: absolute; right: 0px; cursor: pointer;' src='http://i.imgur.com/JvlpEy9.png' data-src='" + t.href + "' /><iframe class='plugEmbed' src='" + embed + "' width='100%' allowFullScreen frameborder='0'></iframe>"
+		        	return t.outerHTML = "<img class='closeImage' style='position: absolute; right: 0px; cursor: pointer;' src='https://i.imgur.com/JvlpEy9.png' data-src='" + t.href + "' /><iframe class='plugEmbed' src='" + embed + "' width='100%' allowFullScreen frameborder='0'></iframe>"
 		        	
 		        }
 		    })
