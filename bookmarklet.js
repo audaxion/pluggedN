@@ -354,14 +354,14 @@ function showTheme() {
 	var theme = themes[settings.theme];
 	if(settings.videoSize === 'normal') {
 		if(theme.name === 'none') {
-			$('body').css('background', originalTheme);
+			$('#room .room-background').css('background', originalTheme);
 			$('#playback .background').show();
 		} else {
-			$('body').css('background', 'url(https://i.imgur.com/'+theme.url+'.png) no-repeat');
+			$('#room .room-background').css('background', 'url(https://i.imgur.com/'+theme.url+'.png) no-repeat');
 			$('#playback .background').hide()
 		}
 	} else {
-		$('body').css('background-image','none');
+		$('#room .room-background').css('background-image','none');
 		$('#playback .background').hide()
 	}
 }
