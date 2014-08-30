@@ -129,7 +129,7 @@ function once() {
 	}
 	ran = true;
 	user = API.getUser();
-	API.on(API.DJ_ADVANCE,advance);
+	API.on(API.ADVANCE,advance);
 	API.on(API.CHAT, chatReceived);
 	$('#playlist-button').on('click', openPlaylist)
 	$('body').append('<style type="text/css">#volume .slider { display: block !important; }' +
