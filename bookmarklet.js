@@ -318,7 +318,7 @@ function vote() {
 	$('#room #woot').click();
 }
 function rankedVote() {
-	if (API.getDJ().permission >= API.ROLE.RESIDENTDJ) {
+	if (API.getDJ().role >= API.ROLE.DJ) {
 		$('#room #woot').click();
 	}
 }
