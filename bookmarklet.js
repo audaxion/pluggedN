@@ -59,6 +59,7 @@ var settings = {
 	chatReplacement: true,
 	videoSize: 'normal',
 	customColors: false,
+	hideBadges: true,
 	rankColors: {
 		host: "#ac76ff",
 		manager: "#ac76ff",
@@ -83,6 +84,7 @@ for(var i = 0; i < autowoot.length; i++) {
 }
 gui.add(settings, 'autowoot', autowootSettingsObject).onChange(setWootBehavior);
 gui.add(settings, 'inlineImages').onChange(doInlineImages);
+gui.add(settings, 'hideBadges').onChange(showHideBadges);
 
 gui.add(settings,'videoSize', ['normal','large']).onChange(updateVideoSize)
 var themeSettingsObject = {}
@@ -131,6 +133,7 @@ function once() {
 	user = API.getUser();
 	API.on(API.ADVANCE,advance);
 	API.on(API.CHAT, chatReceived);
+	API.on(API.CHAT, hideBadges);
 	$('#playlist-button').on('click', openPlaylist)
 	$('body').append('<style type="text/css">#volume .slider { display: block !important; }' +
 		'#room.largePlayer #dj-button { z-index:10; -webkit-transition:opacity 0.8s; transition: opacity 0.8s; }' +
@@ -142,7 +145,10 @@ function once() {
 		+ '</style>')
 	$('#meh').on('click', mehClicked);
 	console.log('window key handler');
-	window.addEventListener('keyup', documentKeyDown)
+	window.addEventListener('keyup', documentKeyDown);
+	
+	hideBadges();
+	
 	showHideAudience();
 
 	showHideVideo();
@@ -154,7 +160,16 @@ function once() {
 	setWootBehavior();
 
 	updateVideoSize();
-	applyCustomColorsClass()
+	applyCustomColorsClass();
+}
+function showHideBadges() {
+	if (settings.hideBadges) {
+		$("#chat .badge-box").hide(); 
+		$("#chat .msg").css("padding-left", "10px");
+	} else {
+		$("#chat .badge-box").show(); 
+		$("#chat .msg").css("padding-left", "46px");
+	}
 }
 function documentKeyDown(event) {
 	var target = event.target.tagName.toLowerCase()
@@ -171,9 +186,19 @@ function documentKeyDown(event) {
 }
 function replaceText(ele) {
 	var replacements = {
-		'/whatever': '¯\\_(ツ)_/¯'//, :(
-		//'/tableflip': '(╯°□°）╯︵ ┻━┻',
-		//'/tablefix': '┬─┬ノ( º _ ºノ)'
+		'/whatever': '¯\\_(ツ)_/¯',
+		'/tableflip': '(╯°□°）╯︵ ┻━┻',
+		'/tablefix': '┬─┬ノ( º _ ºノ)',
+		'/monocle': 'ಠ_ರೃ',
+		'/disapproval': 'ಠ_ಠ',
+		'/donger': 'ヽ༼ຈل͜ຈ༽ﾉ',
+		'/give': '༼ つ ◕◡◕ ༽つ',
+		'/lenny': '( ͡° ͜ʖ ͡°)',
+		'/soviet': 'ノ┬─┬ノ ︵ ( \\o°o)\\',
+		'/danceparty': '♪┏(・o･)┛♪┗ ( ･o･) ┓♪┏(・o･)┛♪',
+		'/fu': '╭∩╮（︶︿︶）╭∩╮',
+		'/koala': 'ʕ •ᴥ•ʔ',
+		'/spooky': 'ヘ(◕。◕ヘ)'
 	}
 	$ele = $(ele);
 	var curText = $ele.val();
