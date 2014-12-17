@@ -133,7 +133,7 @@ function once() {
 	user = API.getUser();
 	API.on(API.ADVANCE,advance);
 	API.on(API.CHAT, chatReceived);
-	API.on(API.CHAT, hideBadges);
+	API.on(API.CHAT, showHideBadges);
 	$('#playlist-button').on('click', openPlaylist)
 	$('body').append('<style type="text/css">#volume .slider { display: block !important; }' +
 		'#room.largePlayer #dj-button { z-index:10; -webkit-transition:opacity 0.8s; transition: opacity 0.8s; }' +
@@ -147,7 +147,7 @@ function once() {
 	console.log('window key handler');
 	window.addEventListener('keyup', documentKeyDown);
 	
-	hideBadges();
+	showHideBadges();
 	
 	showHideAudience();
 
